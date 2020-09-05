@@ -1,4 +1,4 @@
-// @node @node "path\index.js" %* test.cmd
+// @node "path\index.js" %* test.cmd
 // node path/index.js test.sh
 //  1 - Save these files in Users/username/APPDATA/roaming/npm
 
