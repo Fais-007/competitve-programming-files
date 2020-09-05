@@ -1,17 +1,21 @@
-// @node @node "path\index.js" %*
+// @node @node "path\index.js" %* test.cmd
+// node path/index.js test.sh
+//  1 - Save these files in Users/username/APPDATA/roaming/npm
 
 const app = require("express")();
 const bodyParser = require("body-parser");
+const { dir } = require("console");
 const fs = require("fs");
+var os = require("os");
 
 const port = 10043;
 
 app.use(bodyParser.json());
 
-var dir = process.cwd();
+const plat = os.platform();
 
 const createDir = (dirPath) => {
-  fs.mkdirSync(process.cwd() + "\\" + dirPath, { recursive: true }, (error) => {
+  fs.mkdirSync(dirPath, { recursive: true }, (error) => {
     if (error) console.log("An error occured while creating directory");
     else console.log("Directory created!");
   });
@@ -26,13 +30,22 @@ const createFile = (filePath, fileContent) => {
 
 app.post("/", (req, res) => {
   const data = req.body;
-  createDir(data.name);
+  var path = "",
+    filePath = "";
+  if (plat === "linux") {
+    path = process.cwd() + "/" + data.name;
+    filePath = process.cwd() + "/" + data.name + `/`;
+  } else {
+    path = process.cwd() + "\\" + data.name;
+    filePath = process.cwd() + "\\" + data.name + `\\`;
+  }
+  createDir(path);
   const len = data.tests.length;
   for (var i = 0; i < len; ++i) {
     var testCases = data["tests"][i]["input"];
     var output = data["tests"][i]["output"];
-    createFile(process.cwd() + "\\" + data.name + `\\in${i}`, testCases);
-    createFile(process.cwd() + "\\" + data.name + `\\out${i}`, output);
+    createFile(`${filePath}in${i}`, testCases);
+    createFile(`${filePath}out${i}`, output);
   }
   res.sendStatus(200);
 });
