@@ -1,7 +1,4 @@
-// @node "path\index.js" %* test.cmd
-// node path/index.js test.sh
-//  1 - Save these files in Users/username/APPDATA/roaming/npm
-
+#!/usr/bin/env node
 const app = require("express")();
 const bodyParser = require("body-parser");
 const { dir } = require("console");
@@ -21,10 +18,10 @@ const createDir = (dirPath) => {
   });
 };
 
-const createFile = (filePath, fileContent) => {
+const createFile = (filePath, fileContent, programName) => {
   fs.writeFile(filePath, fileContent, (error) => {
     if (error) console.log("An error occured while creating test cases");
-    else console.log("Files created");
+    else console.log(`Files created for ${programName}`);
   });
 };
 
@@ -44,8 +41,8 @@ app.post("/", (req, res) => {
   for (var i = 0; i < len; ++i) {
     var testCases = data["tests"][i]["input"];
     var output = data["tests"][i]["output"];
-    createFile(`${filePath}in${i}`, testCases);
-    createFile(`${filePath}out${i}`, output);
+    createFile(`${filePath}in${i}`, testCases, data.name);
+    createFile(`${filePath}out${i}`, output, data.name);
   }
   res.sendStatus(200);
 });

@@ -1,7 +1,8 @@
 {
-  "name": "competitive-companion-example",
+  "name": "create",
   "version": "1.0.0",
   "license": "MIT",
+  "bin": "index.js",
   "scripts": {
     "start": "node index"
   },
