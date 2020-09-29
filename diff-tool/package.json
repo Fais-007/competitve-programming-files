@@ -1,0 +1,17 @@
+{
+    "name": "check",
+    "version": "1.0.0",
+    "description": "",
+    "bin": "index.js",
+    "main": "index.js",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "colors": "^1.4.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "check"
+    },
+    "author": "Faisal Iqbal",
+    "license": "ISC"
+}
