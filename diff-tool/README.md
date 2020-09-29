@@ -1,4 +1,4 @@
-# This is a diff-tool to check difference between actual output and obtained ouput
+## This is a diff-tool to check difference between actual output and obtained ouput
 
 ## Instructions
 
